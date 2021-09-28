@@ -1,3 +1,31 @@
+Performance: 24.327 ns/day, 0.987 hours/ns, 1126.269 timesteps/s
+152.2% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 127.71     | 127.71     | 127.71     |   0.0 | 71.92
+Neigh   | 0.020318   | 0.020318   | 0.020318   |   0.0 |  0.01
+Comm    | 32.525     | 32.525     | 32.525     |   0.0 | 18.32
+Output  | 0.13267    | 0.13267    | 0.13267    |   0.0 |  0.07
+Modify  | 8.2695     | 8.2695     | 8.2695     |   0.0 |  4.66
+Other   |            | 8.923      |            |       |  5.02
+
+Nlocal:        256.000 ave         256 max         256 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:        2405.00 ave        2405 max        2405 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:         0.00000 ave           0 max           0 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+FullNghs:      63270.0 ave       63270 max       63270 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 63270
+Ave neighs/atom = 247.14844
+Neighbor list builds = 24
+Dangerous builds = 0
+Total wall time: 0:03:37
+
 ==35731== Profiling application: ../../lammps/build-gpu/lmp -k on g 1 -sf kk -pk kokkos newton on neigh half
 ==35731== Profiling result:
             Type  Time(%)      Time     Calls       Avg       Min       Max  Name
