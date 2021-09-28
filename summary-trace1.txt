@@ -1,0 +1,80 @@
+==34120== Profiling application: ../../lammps/build-gpu/lmp -k on g 1 -sf kk -pk kokkos newton on neigh half
+==34120== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   17.63%  1.09544s      9960  109.98us  99.135us  139.65us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::PairSNAPKokkos<Kokkos::Cuda, double, int=32>, Kokkos::RangePolicy<>, Kokkos::Cuda>>(void)
+                   14.10%  876.06ms     10001  87.597us  83.520us  97.408us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::PairSNAPKokkos<Kokkos::Cuda, double, int=32>, Kokkos::TeamPolicy<>, Kokkos::Cuda>, unsigned int=64, unsigned int=0>(void)
+                   14.04%  872.37ms     10001  87.228us  82.976us  97.055us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::PairSNAPKokkos<Kokkos::Cuda, double, int=32>, Kokkos::TeamPolicy<>, Kokkos::Cuda>, unsigned int=64, unsigned int=0>(void)
+                   13.96%  867.48ms     10001  86.739us  82.687us  96.575us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::PairSNAPKokkos<Kokkos::Cuda, double, int=32>, Kokkos::TeamPolicy<>, Kokkos::Cuda>, unsigned int=64, unsigned int=0>(void)
+                   13.31%  827.15ms     10001  82.707us  76.096us  95.935us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::PairSNAPKokkos<Kokkos::Cuda, double, int=32>, Kokkos::TeamPolicy<>, Kokkos::Cuda>, unsigned int=128, unsigned int=0>(void)
+                    4.61%  286.33ms      9960  28.747us  26.943us  33.599us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::PairSNAPKokkos<Kokkos::Cuda, double, int=32>, Kokkos::MDRangePolicy<>, Kokkos::Cuda>, unsigned int=256, unsigned int=0>(void)
+                    4.33%  268.82ms     10001  26.878us  25.696us  37.247us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::PairSNAPKokkos<Kokkos::Cuda, double, int=32>, Kokkos::TeamPolicy<>, Kokkos::Cuda>, unsigned int=128, unsigned int=0>(void)
+                    3.84%  238.25ms    153003  1.5570us  1.0870us  14.784us  [CUDA memcpy HtoD]
+                    3.27%  203.29ms     60006  3.3870us  2.7520us  14.560us  void Kokkos::Impl::cuda_parallel_launch_local_memory<Kokkos::Impl::ParallelFor<AtomVecKokkos_UnPackReverseSelf<Kokkos::Cuda>, Kokkos::RangePolicy<>, Kokkos::Cuda>>(Kokkos::Cuda)
+                    2.29%  142.52ms     10001  14.250us  13.568us  25.536us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::PairSNAPKokkos<Kokkos::Cuda, double, int=32>, Kokkos::MDRangePolicy<>, Kokkos::Cuda>, unsigned int=128, unsigned int=0>(void)
+                    1.24%  77.289ms     10001  7.7280us  7.0720us  9.1840us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::PairSNAPKokkos<Kokkos::Cuda, double, int=32>, Kokkos::RangePolicy<>, Kokkos::Cuda>>(void)
+                    1.11%  68.807ms      9999  6.8810us  6.5270us  19.200us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelReduce<LAMMPS_NS::NeighborKokkos, Kokkos::RangePolicy<>, Kokkos::InvalidType, Kokkos::Cuda>>(void)
+                    1.10%  68.546ms     10001  6.8530us  6.6230us  16.736us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelReduce<Kokkos::Impl::CudaFunctorAdapter<LAMMPS_NS::FindMaxNumNeighs<Kokkos::Cuda>, Kokkos::RangePolicy<>, int, void>, Kokkos::RangePolicy<>, Kokkos::Max<int, Kokkos::HostSpace>, Kokkos::Cuda>>(void)
+                    1.05%  65.045ms     10001  6.5030us  5.9200us  8.5120us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::PairSNAPKokkos<Kokkos::Cuda, double, int=32>, Kokkos::MDRangePolicy<>, Kokkos::Cuda>, unsigned int=128, unsigned int=0>(void)
+                    0.83%  51.253ms      9999  5.1250us  4.8000us  14.463us  void Kokkos::Impl::cuda_parallel_launch_local_memory<Kokkos::Impl::ParallelFor<AtomVecKokkos_PackCommSelfFused<Kokkos::Cuda, int=1>, Kokkos::RangePolicy<>, Kokkos::Cuda>>(Kokkos::Cuda)
+                    0.82%  50.907ms     10001  5.0900us  4.5440us  6.2400us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::PairSNAPKokkos<Kokkos::Cuda, double, int=32>, Kokkos::MDRangePolicy<>, Kokkos::Cuda>, unsigned int=128, unsigned int=0>(void)
+                    0.74%  46.271ms     10000  4.6270us  3.9990us  13.760us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::FixNVEKokkosFinalIntegrateFunctor<Kokkos::Cuda, int=0>, Kokkos::RangePolicy<>, Kokkos::Cuda>>(void)
+                    0.69%  42.587ms     10000  4.2580us  4.1590us  5.0560us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::FixNVEKokkosInitialIntegrateFunctor<Kokkos::Cuda, int=0>, Kokkos::RangePolicy<>, Kokkos::Cuda>>(void)
+                    0.44%  27.501ms     10001  2.7490us  2.3040us  3.3280us  void Kokkos::Impl::cuda_parallel_launch_local_memory<Kokkos::Impl::ParallelFor<Zero<Kokkos::View<double*[3]>>, Kokkos::RangePolicy<>, Kokkos::Cuda>>(double*[3])
+                    0.18%  11.422ms      6651  1.7170us  1.2150us  19.136us  [CUDA memcpy DtoH]
+                    0.17%  10.340ms        41  252.19us  244.93us  278.11us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelReduce<LAMMPS_NS::PairSNAPKokkos<Kokkos::Cuda, double, int=32>, Kokkos::RangePolicy<>, Kokkos::InvalidType, Kokkos::Cuda>>(void)
+                    0.03%  2.0668ms       534  3.8700us  2.8800us  5.2160us  void Kokkos::Impl::cuda_parallel_launch_local_memory<Kokkos::Impl::ParallelFor<Kokkos::Impl::ViewCopy<Kokkos::View<double**>, Kokkos::View<double const **>, Kokkos::LayoutRight, Kokkos::Cuda, int=2, int>, Kokkos::MDRangePolicy<>, Kokkos::Cuda>>(double**)
+                    0.03%  2.0070ms       765  2.6230us  2.3050us  4.3200us  void Kokkos::Impl::cuda_parallel_launch_local_memory<Kokkos::Impl::ParallelFor<Kokkos::Impl::ViewValueFunctor<Kokkos::Cuda, int, bool=1>, Kokkos::RangePolicy<>, Kokkos::Cuda>>(Kokkos::Cuda)
+                    0.03%  1.9219ms       704  2.7300us  2.4630us  3.0720us  void Kokkos::Impl::cuda_parallel_launch_local_memory<Kokkos::Impl::ParallelFor<Kokkos::Impl::ViewCopy<Kokkos::View<int*>, Kokkos::View<int const *>, Kokkos::LayoutLeft, Kokkos::Cuda, int=1, int>, Kokkos::RangePolicy<>, Kokkos::Cuda>>(int*)
+                    0.03%  1.7704ms         3  590.14us  588.16us  593.53us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::NPairKokkosBuildFunctor<Kokkos::Cuda, int=0, int=1, int=0>, Kokkos::TeamPolicy<>, Kokkos::Cuda>>(void)
+                    0.02%  1.4804ms       557  2.6570us  2.4950us  3.1050us  void Kokkos::Impl::cuda_parallel_launch_local_memory<Kokkos::Impl::ParallelFor<Kokkos::Impl::ViewValueFunctor<Kokkos::Cuda, double, bool=1>, Kokkos::RangePolicy<>, Kokkos::Cuda>>(Kokkos::Cuda)
+                    0.02%  1.1081ms        41  27.026us  26.080us  29.023us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::PairSNAPKokkos<Kokkos::Cuda, double, int=32>, Kokkos::MDRangePolicy<>, Kokkos::Cuda>, unsigned int=256, unsigned int=0>(void)
+                    0.02%  1.0867ms        41  26.504us  25.952us  30.623us  void Kokkos::Impl::cuda_parallel_launch_local_memory<Kokkos::Impl::ParallelReduce<LAMMPS_NS::PairVirialFDotRCompute<Kokkos::Cuda>, Kokkos::RangePolicy<>, Kokkos::InvalidType, Kokkos::Cuda>>(Kokkos::Cuda)
+                    0.01%  879.48us        42  20.939us  20.352us  23.488us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelReduce<LAMMPS_NS::ComputeTempKokkos<Kokkos::Cuda>, Kokkos::RangePolicy<>, Kokkos::InvalidType, Kokkos::Cuda>>(void)
+                    0.01%  854.23us        41  20.834us  20.384us  22.976us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelReduce<LAMMPS_NS::ComputeTempKokkos<Kokkos::Cuda>, Kokkos::RangePolicy<>, Kokkos::InvalidType, Kokkos::Cuda>>(void)
+                    0.01%  516.47us        41  12.596us  12.128us  14.144us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::PairSNAPKokkos<Kokkos::Cuda, double, int=32>, Kokkos::MDRangePolicy<>, Kokkos::Cuda>, unsigned int=128, unsigned int=0>(void)
+                    0.01%  416.22us        41  10.151us  9.7920us  11.455us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::PairSNAPKokkos<Kokkos::Cuda, double, int=32>, Kokkos::MDRangePolicy<>, Kokkos::Cuda>, unsigned int=256, unsigned int=0>(void)
+                    0.00%  189.56us        41  4.6230us  4.4790us  5.1520us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::PairSNAPKokkos<Kokkos::Cuda, double, int=32>, Kokkos::MDRangePolicy<>, Kokkos::Cuda>, unsigned int=128, unsigned int=0>(void)
+                    0.00%  105.15us        17  6.1850us  6.1120us  6.5920us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::NPairKokkosBinAtomsFunctor<Kokkos::Cuda>, Kokkos::RangePolicy<>, Kokkos::Cuda>>(void)
+                    0.00%  67.968us        12  5.6640us  4.5760us  8.1920us  void Kokkos::Impl::cuda_parallel_launch_local_memory<Kokkos::Impl::ParallelFor<BuildBorderListFunctor<Kokkos::Cuda>, Kokkos::TeamPolicy<>, Kokkos::Cuda>>(Kokkos::Cuda)
+                    0.00%  50.910us        12  4.2420us  3.8720us  4.6080us  void Kokkos::Impl::cuda_parallel_launch_local_memory<Kokkos::Impl::ParallelFor<AtomVecAtomicKokkos_PackBorder<Kokkos::Cuda, int=1>, Kokkos::RangePolicy<>, Kokkos::Cuda>>(Kokkos::Cuda)
+                    0.00%  43.649us        17  2.5670us  2.4960us  2.8480us  void Kokkos::Impl::cuda_parallel_launch_local_memory<Kokkos::Impl::ParallelFor<MemsetZeroFunctor<Kokkos::Cuda>, Kokkos::RangePolicy<>, Kokkos::Cuda>>(Kokkos::Cuda)
+                    0.00%  40.672us        12  3.3890us  3.0400us  3.6800us  void Kokkos::Impl::cuda_parallel_launch_local_memory<Kokkos::Impl::ParallelFor<AtomVecAtomicKokkos_UnpackBorder<Kokkos::Cuda>, Kokkos::RangePolicy<>, Kokkos::Cuda>>(Kokkos::Cuda)
+                    0.00%  20.736us         8  2.5920us  2.3360us  2.9440us  void Kokkos::Impl::cuda_parallel_launch_local_memory<Kokkos::Impl::ParallelFor<Kokkos::Impl::ViewFill<Kokkos::View<unsigned int*>, Kokkos::LayoutRight, Kokkos::Cuda, int=1, int>, Kokkos::RangePolicy<>, Kokkos::Cuda>>(unsigned int*)
+                    0.00%  15.168us         4  3.7920us  3.1680us  4.6720us  void Kokkos::Impl::cuda_parallel_launch_local_memory<Kokkos::Impl::ParallelFor<DomainPBCFunctor<Kokkos::Cuda, int=1, int=0>, Kokkos::RangePolicy<>, Kokkos::Cuda>>(Kokkos::Cuda)
+                    0.00%  14.144us         4  3.5360us  3.1040us  3.9680us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::DomainKokkos, Kokkos::RangePolicy<>, Kokkos::Cuda>>(void)
+                    0.00%  13.505us         4  3.3760us  3.0720us  3.7440us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::DomainKokkos, Kokkos::RangePolicy<>, Kokkos::Cuda>>(void)
+                    0.00%  11.040us         4  2.7600us  2.5600us  3.0080us  void Kokkos::Impl::cuda_parallel_launch_local_memory<Kokkos::Impl::ParallelFor<Kokkos::Impl::ViewValueFunctor<Kokkos::Cuda, unsigned int, bool=1>, Kokkos::RangePolicy<>, Kokkos::Cuda>>(Kokkos::Cuda)
+                    0.00%  7.0080us         2  3.5040us  3.4560us  3.5520us  [CUDA memset]
+                    0.00%  6.9450us         2  3.4720us  3.4560us  3.4890us  void Kokkos::Impl::cuda_parallel_launch_constant_memory<Kokkos::Impl::ParallelFor<LAMMPS_NS::NeighborKokkos, Kokkos::RangePolicy<>, Kokkos::Cuda>>(void)
+                    0.00%  4.5430us         1  4.5430us  4.5430us  4.5430us  Kokkos::_GLOBAL__N__52_tmpxft_00003ebf_00000000_7_Kokkos_Cuda_Locks_cpp1_ii_915ea793::init_lock_array_kernel_atomic(void)
+                    0.00%  4.2880us         1  4.2880us  4.2880us  4.2880us  Kokkos::_GLOBAL__N__52_tmpxft_00003ebf_00000000_7_Kokkos_Cuda_Locks_cpp1_ii_915ea793::init_lock_array_kernel_threadid(int)
+                    0.00%  3.1680us         1  3.1680us  3.1680us  3.1680us  Kokkos::Impl::_GLOBAL__N__55_tmpxft_00003e88_00000000_7_Kokkos_Cuda_Instance_cpp1_ii_a8bc5097::query_cuda_kernel_arch(int*)
+      API calls:   41.51%  4.47172s    150247  29.762us     651ns  1.9410ms  cudaEventSynchronize
+                   32.31%  3.48100s     18107  192.25us     776ns  2.35871s  cudaDeviceSynchronize
+                   11.74%  1.26475s    232926  5.4290us  3.3720us  1.9408ms  cudaLaunchKernel
+                    6.65%  716.36ms    150247  4.7670us  2.8430us  1.1039ms  cudaMemcpyToSymbolAsync
+                    4.28%  460.63ms    150247  3.0650us  2.2340us  432.37us  cudaEventRecord
+                    1.98%  213.50ms     41705  5.1190us     725ns  366.54us  cudaStreamSynchronize
+                    0.99%  106.66ms      9392  11.356us  2.9600us  137.19us  cudaMemcpy
+                    0.31%  33.867ms     62056     545ns     215ns  424.50us  cuPointerGetAttributes
+                    0.10%  10.440ms      1401  7.4510us  1.9590us  263.19us  cudaMalloc
+                    0.07%  7.9053ms      1396  5.6620us  2.0350us  187.52us  cudaFree
+                    0.02%  1.9646ms         2  982.30us  980.79us  983.81us  cuDeviceTotalMem
+                    0.01%  1.5823ms      1326  1.1930us     463ns  460.25us  cudaPointerGetAttributes
+                    0.01%  805.23us         1  805.23us  805.23us  805.23us  cudaHostAlloc
+                    0.00%  300.05us       202  1.4850us     101ns  64.215us  cuDeviceGetAttribute
+                    0.00%  272.12us         2  136.06us  134.96us  137.16us  cudaGetDeviceProperties
+                    0.00%  202.69us        44  4.6060us  2.4690us  9.4280us  cudaFuncGetAttributes
+                    0.00%  140.85us        15  9.3890us  7.1970us  13.940us  cudaMemcpyToSymbol
+                    0.00%  34.924us        42     831ns     454ns  1.7060us  cudaFuncSetCacheConfig
+                    0.00%  30.084us         2  15.042us  12.919us  17.165us  cuDeviceGetName
+                    0.00%  22.321us         2  11.160us  5.6180us  16.703us  cudaMemset
+                    0.00%  8.7370us         1  8.7370us  8.7370us  8.7370us  cudaEventCreate
+                    0.00%  7.7670us         1  7.7670us  7.7670us  7.7670us  cudaMallocHost
+                    0.00%  5.9110us         2  2.9550us  1.1240us  4.7870us  cuDeviceGetPCIBusId
+                    0.00%  3.6410us         1  3.6410us  3.6410us  3.6410us  cudaSetDevice
+                    0.00%  2.4460us         1  2.4460us  2.4460us  2.4460us  cudaGetDeviceCount
+                    0.00%  1.6570us         1  1.6570us  1.6570us  1.6570us  cudaDeviceSetCacheConfig
+                    0.00%     967ns         4     241ns     108ns     410ns  cuDeviceGet
+                    0.00%     600ns         2     300ns     142ns     458ns  cuDeviceGetCount
+                    0.00%     369ns         2     184ns     139ns     230ns  cuDeviceGetUuid
