@@ -1,0 +1,151 @@
+LAMMPS (2 Jul 2021)
+KOKKOS mode is enabled (src/KOKKOS/kokkos.cpp:97)
+  will use up to 1 GPU(s) per node
+  using 1 OpenMP thread(s) per MPI task
+package kokkos
+package kokkos newton on neigh half
+# Demonstrate SNAP Ta potential
+
+# Initialize simulation
+
+variable nsteps index 100
+variable nrep equal 12
+variable a equal 3.316
+units           metal
+
+# generate the box and atom positions using a BCC lattice
+
+variable nx equal ${nrep}
+variable nx equal 12
+variable ny equal ${nrep}
+variable ny equal 12
+variable nz equal ${nrep}
+variable nz equal 12
+
+boundary        p p p
+
+lattice         bcc $a
+lattice         bcc 3.316
+Lattice spacing in x,y,z = 3.3160000 3.3160000 3.3160000
+region          box block 0 ${nx} 0 ${ny} 0 ${nz}
+region          box block 0 12 0 ${ny} 0 ${nz}
+region          box block 0 12 0 12 0 ${nz}
+region          box block 0 12 0 12 0 12
+create_box      1 box
+Created orthogonal box = (0.0000000 0.0000000 0.0000000) to (39.792000 39.792000 39.792000)
+  1 by 1 by 1 MPI processor grid
+create_atoms    1 box
+Created 3456 atoms
+  create_atoms CPU = 0.002 seconds
+
+mass 1 180.88
+
+# choose potential
+
+include Ta06A.snap
+# DATE: 2014-09-05 UNITS: metal CONTRIBUTOR: Aidan Thompson athomps@sandia.gov CITATION: Thompson, Swiler, Trott, Foiles and Tucker, arxiv.org, 1409.3880 (2014)
+
+# Definition of SNAP potential Ta_Cand06A
+# Assumes 1 LAMMPS atom type
+
+variable zblcutinner equal 4
+variable zblcutouter equal 4.8
+variable zblz equal 73
+
+# Specify hybrid with SNAP, ZBL
+
+pair_style hybrid/overlay zbl ${zblcutinner} ${zblcutouter} snap
+pair_style hybrid/overlay zbl 4 ${zblcutouter} snap
+pair_style hybrid/overlay zbl 4 4.8 snap
+pair_coeff 1 1 zbl ${zblz} ${zblz}
+pair_coeff 1 1 zbl 73 ${zblz}
+pair_coeff 1 1 zbl 73 73
+pair_coeff * * snap Ta06A.snapcoeff Ta06A.snapparam Ta
+Reading potential file Ta06A.snapcoeff with DATE: 2014-09-05
+SNAP Element = Ta, Radius 0.5, Weight 1
+Reading potential file Ta06A.snapparam with DATE: 2014-09-05
+SNAP keyword rcutfac 4.67637
+SNAP keyword twojmax 6
+SNAP keyword rfac0 0.99363
+SNAP keyword rmin0 0
+SNAP keyword bzeroflag 0
+SNAP keyword quadraticflag 0
+
+
+# Setup output
+
+thermo          10
+thermo_modify norm yes
+
+# Set up NVE run
+
+timestep 0.5e-3
+neighbor 1.0 bin
+neigh_modify once no every 1 delay 0 check yes
+
+# Run MD
+
+velocity all create 300.0 4928459 loop geom
+fix 1 all nve
+run             ${nsteps}
+run             100
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.8
+  ghost atom cutoff = 5.8
+  binsize = 5.8, bins = 7 7 7
+  2 neighbor lists, perpetual/occasional/extra = 2 0 0
+  (1) pair zbl, perpetual, half/full from (2)
+      attributes: half, newton on, kokkos_device
+      pair build: halffull/newton/kk/device
+      stencil: none
+      bin: none
+  (2) pair snap, perpetual
+      attributes: full, newton on, kokkos_device
+      pair build: full/bin/kk/device
+      stencil: full/bin/3d
+      bin: kk/device
+Per MPI rank memory allocation (min/avg/max) = 18.97 | 18.97 | 18.97 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0          300    -11.85157            0   -11.812803    2734.2581 
+      10    295.99873   -11.851053            0   -11.812803    2711.5988 
+      20    284.47558   -11.849564            0   -11.812803    2312.9847 
+      30    266.38279   -11.847226            0   -11.812803    1864.1243 
+      40    242.84181   -11.844184            0   -11.812803    1552.1221 
+      50    215.24482   -11.840617            0   -11.812803    1405.1809 
+      60    185.20094   -11.836735            0   -11.812803    1409.5615 
+      70    154.43876   -11.832759            0   -11.812802     1531.131 
+      80    124.69543   -11.828916            0   -11.812802    1730.4578 
+      90    97.603227   -11.825415            0   -11.812802    1967.2554 
+     100    74.582238    -11.82244            0   -11.812802    2203.6522 
+Loop time of 0.134664 on 1 procs for 100 steps with 3456 atoms
+
+Performance: 32.080 ns/day, 0.748 hours/ns, 742.591 timesteps/s
+100.0% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.12263    | 0.12263    | 0.12263    |   0.0 | 91.06
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.0043414  | 0.0043414  | 0.0043414  |   0.0 |  3.22
+Output  | 0.00047329 | 0.00047329 | 0.00047329 |   0.0 |  0.35
+Modify  | 0.0023337  | 0.0023337  | 0.0023337  |   0.0 |  1.73
+Other   |            | 0.004887   |            |       |  3.63
+
+Nlocal:        3456.00 ave        3456 max        3456 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:        4015.00 ave        4015 max        4015 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:        100224.0 ave      100224 max      100224 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+FullNghs:      200448.0 ave      200448 max      200448 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 200448
+Ave neighs/atom = 58.000000
+Neighbor list builds = 0
+Dangerous builds = 0
+
+Total wall time: 0:00:02
